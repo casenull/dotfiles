@@ -1,9 +1,8 @@
 local status, gitsigns = pcall(require, "gitsigns")
-if (not status) then
-  return
+if not status then
+    return
 end
 
 gitsigns.setup({
-  signcolumn = true
+    signcolumn = true
 })
-

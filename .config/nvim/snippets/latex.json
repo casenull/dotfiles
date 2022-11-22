@@ -1,0 +1,27 @@
+{
+	"quotes": {
+		"prefix": "quotes",
+		"body": "``${0:${TM_SELECTED_TEXT}}''",
+		"description": "Quotes"
+	},
+	"gerquotes": {
+		"prefix": "gerquotes",
+		"body": "\\glqq ${0:${TM_SELECTED_TEXT}}\\grqq",
+		"description": "German quotes"
+	},
+	"gersquotes": {
+		"prefix": "gersquotes",
+		"body": "\\glq ${0:${TM_SELECTED_TEXT}}\\grq",
+		"description": "German single quotes"
+	},
+	"frquotes": {
+		"prefix": "frquotes",
+		"body": "\\flqq ${0:${TM_SELECTED_TEXT}}\\frqq",
+		"description": "French quotes (guillemets)"
+	},
+	"frsquotes": {
+		"prefix": "frsquotes",
+		"body": "\\flq ${0:${TM_SELECTED_TEXT}}\\frq",
+		"description": "French single quotes (guillemets)"
+	}
+}
