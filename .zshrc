@@ -70,7 +70,3 @@ autoload -U compinit && compinit
 
 # Prompt #
 PROMPT='%B%F{green}%n@%m%f:%F{blue}%~%f$%b '
-
-# Envvars #
-export PGHOST="localhost"
-export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin"
