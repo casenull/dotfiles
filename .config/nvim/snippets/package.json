@@ -1,11 +1,14 @@
 {
-  "name": "snippets",
-  "contributes": {
-    "snippets": [
-      {
-        "language": ["plaintex", "tex"],
-        "path": "latex.json"
-      }
-    ]
-  }
+	"name": "snippets",
+	"contributes": {
+		"snippets": [
+			{
+				"language": [
+					"plaintex",
+					"tex"
+				],
+				"path": "latex.json"
+			}
+		]
+	}
 }

@@ -9,10 +9,10 @@ end
 local packer_bootstrap = ensure_packer()
 
 vim.cmd([[
-    augroup packer_user_config
-        autocmd!
-        autocmd BufWritePost plugins-setup.lua source <afile> | PackerSync
-    augroup end
+	augroup packer_user_config
+		autocmd!
+		autocmd BufWritePost plugins-setup.lua source <afile> | PackerSync
+	augroup end
 ]])
 
 local status, packer = pcall(require, "packer")
@@ -36,9 +36,17 @@ packer.startup(function(use)
 	use("nvim-telescope/telescope.nvim")
 	use("nvim-tree/nvim-tree.lua")
 	use("numToStr/Comment.nvim")
-	use("nvim-treesitter/nvim-treesitter")
+	-- use("nvim-treesitter/nvim-treesitter")
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		run = function()
+			local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
+			ts_update()
+		end,
+	})
 	use("windwp/nvim-autopairs")
 	use("windwp/nvim-ts-autotag")
+	use("gpanders/editorconfig.nvim")
 	use("nvim-lualine/lualine.nvim")
 	use("lewis6991/gitsigns.nvim")
 	-- completion
