@@ -48,6 +48,16 @@ cmp.setup({
 				fallback()
 			end
 		end),
+		["<a-j>"] = cmp.mapping(function()
+			if luasnip.choice_active() then
+				luasnip.change_choice(1)
+			end
+		end),
+		["<a-k>"] = cmp.mapping(function()
+			if luasnip.choice_active() then
+				luasnip.change_choice(-1)
+			end
+		end),
 	}),
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },

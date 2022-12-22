@@ -21,6 +21,7 @@ mason_dap.setup({
 		"javatest",
 		"python",
 		"js",
+		"delve",
 	},
 	automatic_setup = true,
 })

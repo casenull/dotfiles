@@ -72,6 +72,12 @@ packer.startup(function(use)
 
 	use("jose-elias-alvarez/null-ls.nvim")
 	use("jayp0521/mason-null-ls.nvim")
+	use({
+		"folke/zen-mode.nvim",
+		config = function()
+			require("zen-mode").setup({})
+		end,
+	})
 
 	if packer_bootstrap then
 		require("packer").sync()

@@ -4,6 +4,7 @@ local keymap = vim.keymap
 local opts = { silent = true }
 
 keymap.set("n", "<leader>nh", "<cmd>nohl<cr>", opts)
+keymap.set("n", "Q", "<nop>", opts)
 
 keymap.set("n", "<leader>sv", "<c-w>v", opts)
 keymap.set("n", "<leader>sh", "<c-w>s", opts)
