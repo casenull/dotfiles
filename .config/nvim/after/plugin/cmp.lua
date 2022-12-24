@@ -8,11 +8,6 @@ if not luasnip_status then
 	return
 end
 
-local lspkind_status, lspkind = pcall(require, "lspkind")
-if not lspkind_status then
-	return
-end
-
 require("luasnip.loaders.from_vscode").lazy_load()
 require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
 
@@ -66,10 +61,10 @@ cmp.setup({
 		{ name = "path" },
 		{ name = "nvim_lua" },
 	}),
-	formatting = {
-		format = lspkind.cmp_format({
-			maxwidth = 50,
-			ellipsis_char = "...",
-		}),
-	},
 })
+
+local cmp_autopairs_status, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
+if not cmp_autopairs_status then
+	return
+end
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())

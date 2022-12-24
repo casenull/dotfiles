@@ -23,5 +23,10 @@
 		"prefix": "frsquotes",
 		"body": "\\flq ${0:${TM_SELECTED_TEXT}}\\frq",
 		"description": "French single quotes (guillemets)"
+	},
+	"ltexlang": {
+		"prefix": "ltexlang",
+		"body": "% LTeX: language=de-CH",
+		"description": "LTeX language server language definition (https://valentjn.github.io/ltex/advanced-usage.html#magic-comments)"
 	}
 }

@@ -1,3 +1,4 @@
-require("casenull.plugins-setup")
-require("casenull.core")
-require("casenull.plugins")
+-- Add ./after to the package path
+package.path = os.getenv("HOME") .. "/.config/nvim/after/?.lua;" .. package.path
+
+require("casenull")

@@ -3,10 +3,8 @@ if not jdtls_status then
 	return
 end
 
-local dap_status, dap = pcall(require, "dap")
-if not dap_status then
-	return
-end
+-- Defined in ../after/lsp-settings.lua
+local lsp_settings = require("lsp-settings")
 
 local bundles = vim.list_extend(
 	{
@@ -20,41 +18,24 @@ local bundles = vim.list_extend(
 	vim.split(vim.fn.glob("~/.local/share/nvim/mason/packages/java-test/extension/server/*.jar", 1), "\n")
 )
 
-local keymap = vim.keymap
-
 local on_attach = function(client, bufnr)
 	-- https://github.com/mfussenegger/nvim-jdtls/blob/master/lua/jdtls/dap.lua#L577
 	jdtls.setup_dap() -- Create new dap adapter for java
 
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 
-	keymap.set("n", "<a-o>", "<cmd>lua require('jdtls').organize_imports()<cr>", opts)
-	keymap.set("n", "crv", "<cmd>lua require('jdtls').extract_variable()<cr>", opts)
-	keymap.set("v", "crv", "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", opts)
-	keymap.set("n", "crc", "<cmd>lua require('jdtls').extract_constant()<cr>", opts)
-	keymap.set("v", "crc", "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", opts)
-	keymap.set("v", "crm", "<esc><cmd>lua require('jdtls').extract_method(true)<cr>", opts)
+	-- nvim-jdtls specific mappings
+	vim.keymap.set("n", "<a-o>", jdtls.organize_imports, opts)
+	vim.keymap.set("n", "crv", jdtls.extract_variable, opts)
+	vim.keymap.set("v", "crv", jdtls.extract_variable, opts)
+	vim.keymap.set("n", "crc", jdtls.extract_constant, opts)
+	vim.keymap.set("v", "crc", jdtls.extract_constant, opts)
+	vim.keymap.set("v", "crm", jdtls.extract_method, opts)
 
-	keymap.set("n", "<leader>df", "<cmd>lua require('jdtls').test_class()<cr>", opts)
-	keymap.set("n", "<leader>dn", "<cmd>lua require('jdtls').test_nearest_method()<cr>", opts)
+	vim.keymap.set("n", "<leader>df", jdtls.test_class, opts)
+	vim.keymap.set("n", "<leader>dn", jdtls.test_nearest_method, opts)
 
-	keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-	keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-	keymap.set("n", "K", vim.lsp.buf.hover, opts)
-	keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-	keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-	keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
-	keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
-	keymap.set("n", "<space>wl", function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end, opts)
-	keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
-	keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
-	keymap.set("n", "<space>ca", vim.lsp.buf.code_action, opts)
-	keymap.set("n", "gr", vim.lsp.buf.references, opts)
-	keymap.set("n", "<space>f", function()
-		vim.lsp.buf.format({ async = true })
-	end, opts)
+	lsp_settings.on_attach(client, bufnr)
 end
 
 jdtls.start_or_attach({
@@ -65,7 +46,13 @@ jdtls.start_or_attach({
 		bundles = bundles,
 	},
 	on_attach = on_attach,
+	capabilities = lsp_settings.capabilities,
 })
+
+local dap_status, dap = pcall(require, "dap")
+if not dap_status then
+	return
+end
 
 dap.configurations.java = {
 	{
