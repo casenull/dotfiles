@@ -69,4 +69,4 @@ bindkey -M vicmd '/' history-incremental-search-backward
 autoload -U compinit && compinit
 
 # Prompt #
-PROMPT='%B%F{green}%n@%m%f:%F{blue}%~%f$%b '
+PROMPT='%B%F{yellow}%n@%m%f:%F{blue}%~%f$%b '
