@@ -33,6 +33,8 @@ packer.startup(function(use)
 
 	use({ "savq/melange", tag = "nvim0.7" })
 	use("folke/tokyonight.nvim")
+	use("rose-pine/neovim")
+	use("EdenEast/nightfox.nvim")
 
 	use({
 		"numToStr/Comment.nvim",
