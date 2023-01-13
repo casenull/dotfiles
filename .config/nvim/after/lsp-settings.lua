@@ -12,54 +12,36 @@ M.servers = {
 	["clangd"] = {},
 	["gopls"] = {},
 	["rust_analyzer"] = {},
-	["jdtls"] = {
-		disable_autostart = true,
-	},
-	["tsserver"] = {
-		opts = {
-			on_attach = function(client, bufnr)
-				-- Formatting is handled by prettier
-				client.server_capabilities.documentFormattingProvider = false
-				M.on_attach(client, bufnr)
-			end,
-		},
-	},
+	["jdtls"] = {},
+	["tsserver"] = {},
 	["sumneko_lua"] = {
-		opts = {
-			settings = {
-				Lua = {
-					format = {
-						enable = false,
-					},
-					diagnostics = {
-						globals = { "vim" },
-					},
-				},
+		Lua = {
+			format = {
+				enable = false,
+			},
+			diagnostics = {
+				globals = { "vim" },
 			},
 		},
 	},
 	["ltex"] = {
-		opts = {
-			settings = {
-				ltex = {
-					language = "en-US",
-					-- dictionary = {
-					-- 	["en-US"] = ":/path/to/file.txt" or {},
-					-- },
-					additionalRules = {
-						enablePickyRules = true,
-						motherTongue = "de-CH",
-					},
-					latex = {
-						commands = {
-							["\\newmintedfile[]{}{}"] = "ignore",
-							["\\lstset{}"] = "ignore",
-							["\\lstinline[]{}"] = "ignore",
-							["\\lstinputlisting[]{}"] = "ignore",
-							["\\lstdefinestyle{}{}"] = "ignore",
-							["\\lstdefinelanguage{}{}"] = "ignore",
-						},
-					},
+		ltex = {
+			language = "en-US",
+			-- dictionary = {
+			-- 	["en-US"] = ":/path/to/file.txt" or {},
+			-- },
+			additionalRules = {
+				enablePickyRules = true,
+				motherTongue = "de-CH",
+			},
+			latex = {
+				commands = {
+					["\\newmintedfile[]{}{}"] = "ignore",
+					["\\lstset{}"] = "ignore",
+					["\\lstinline[]{}"] = "ignore",
+					["\\lstinputlisting[]{}"] = "ignore",
+					["\\lstdefinestyle{}{}"] = "ignore",
+					["\\lstdefinelanguage{}{}"] = "ignore",
 				},
 			},
 		},
@@ -89,14 +71,22 @@ M.on_attach = function(client, bufnr)
 		vim.keymap.set("n", "<leader>f", function()
 			vim.lsp.buf.format({ bufnr = bufnr, async = true })
 		end, opts)
-		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			group = augroup,
-			buffer = bufnr,
-			callback = function()
-				vim.lsp.buf.format({ bufnr = bufnr, async = true })
-			end,
-		})
+
+		-- This allows me to toggle LSP formatting
+		vim.api.nvim_buf_create_user_command(bufnr, "LspToggleFormatting", function()
+			if vim.tbl_isempty(vim.api.nvim_get_autocmds({ group = "LspFormatting" })) then
+				vim.api.nvim_create_autocmd("BufWritePre", {
+					group = augroup,
+					buffer = bufnr,
+					callback = function()
+						vim.lsp.buf.format({ bufnr = bufnr, async = true })
+					end,
+				})
+			else
+				vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+			end
+		end, {})
+		vim.api.nvim_command("LspToggleFormatting")
 	end
 end
 
