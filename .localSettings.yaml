@@ -1,0 +1,5 @@
+---
+# Let's go to war.
+# Should of course be "\t"
+defaultIndent: "    "
+dos2unixlinebreaks: 1
