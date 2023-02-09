@@ -31,7 +31,7 @@ packer.startup(function(use)
 		run = ":TSUpdate",
 	})
 
-	use({ "savq/melange", tag = "nvim0.7" })
+	use("savq/melange-nvim")
 	use("folke/tokyonight.nvim")
 	use("rose-pine/neovim")
 	use("EdenEast/nightfox.nvim")
@@ -87,7 +87,7 @@ packer.startup(function(use)
 
 	-- DAP on the haters
 	use("mfussenegger/nvim-dap")
-	use("jayp0521/mason-nvim-dap.nvim")
+	use("jay-babu/mason-nvim-dap.nvim")
 	use("rcarriga/nvim-dap-ui")
 	use("theHamsta/nvim-dap-virtual-text")
 

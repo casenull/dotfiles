@@ -36,7 +36,7 @@ mason_dap.setup({
 		"javadbg",
 		"javatest",
 		"python",
-		"js",
+		"firefox",
 		"delve",
 	},
 	automatic_setup = true,

@@ -1,0 +1,15 @@
+Toolchain
+Doubleword
+DWord
+Quadword
+QWord
+DQWord
+Instruction
+Clock
+Assembly
+Program
+Significant
+endianness
+little-endian
+big-endian
+

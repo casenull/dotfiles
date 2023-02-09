@@ -1,16 +1,15 @@
-vim.opt.fileencoding = "utf-8" -- editorconfig: charset = utf-8
-vim.opt.fileformat = "unix" -- editorconfig: end_of_line = lf
-
-vim.opt.tabstop = 4 -- editorconfig: tab_width = 4
-vim.opt.shiftwidth = 4 -- editorconfig: indent_size: 4
-vim.opt.expandtab = false -- editorconfig: indent_style = tab
-vim.opt.fixendofline = true -- editorconfig: insert_final_newline = true
-vim.opt.endofline = true -- editorconfig: insert_final_newline = true
+-- vim.opt.fileencoding = "utf-8" -- editorconfig: charset = utf-8
+-- vim.opt.fileformat = "unix"    -- editorconfig: end_of_line = lf
+-- vim.opt.tabstop = 4            -- editorconfig: tab_width = 4
+-- vim.opt.shiftwidth = 4         -- editorconfig: indent_size: 4
+-- vim.opt.expandtab = false      -- editorconfig: indent_style = tab
+-- vim.opt.fixendofline = true    -- editorconfig: insert_final_newline = true
+-- vim.opt.endofline = true       -- editorconfig: insert_final_newline = true
 
 vim.opt.wrap = true
 vim.opt.breakindent = true
 vim.opt.autoindent = true
-vim.opt.list = true
+-- vim.opt.list = true            -- Handled by HolyWar
 vim.opt.listchars = { multispace = "·   ", tab = "> " }
 
 vim.opt.number = true

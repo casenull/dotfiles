@@ -28,5 +28,10 @@
 		"prefix": "ltexlang",
 		"body": "% LTeX: language=de-CH",
 		"description": "LTeX language server language definition (https://valentjn.github.io/ltex/advanced-usage.html#magic-comments)"
+	},
+	"Inline Math": {
+		"prefix": ["mathinline", "\\mathinline"],
+		"body": ["\\($1\\)$0"],
+		"description": "Inline Math Environment"
 	}
 }
