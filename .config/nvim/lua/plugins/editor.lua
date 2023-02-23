@@ -34,4 +34,11 @@ return {
 			require("gitsigns").setup()
 		end,
 	},
+
+	-- Pretty colors
+	{
+		"brenoprata10/nvim-highlight-colors",
+		event = { "BufReadPre", "BufNewFile" },
+		config = true,
+	},
 }
