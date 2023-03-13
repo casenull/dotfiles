@@ -10,6 +10,14 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 	group = ftset,
 })
 
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+	pattern = { "*.j2" },
+	callback = function()
+		vim.opt_local.filetype = "django"
+	end,
+	group = ftset,
+})
+
 local yaml_means_ansible = false
 
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
