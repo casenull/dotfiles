@@ -12,7 +12,7 @@ insert_final_newline = true
 [*.{yaml,yml}]
 indent_style = space
 
-[*.py]
+[*.{py,md}]
 indent_style = space
 indent_size = 4
 
