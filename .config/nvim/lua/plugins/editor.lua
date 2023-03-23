@@ -41,4 +41,9 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		config = true,
 	},
+
+	{
+		"folke/zen-mode.nvim",
+		cmd = "ZenMode",
+	},
 }
