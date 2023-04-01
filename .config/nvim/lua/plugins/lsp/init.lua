@@ -69,7 +69,7 @@ return {
 								motherTongue = "de-CH",
 							},
 							disabledRules = {
-								["en-US"] = { "UPPERCASE_SENTENCE_START" },
+								["en-US"] = { "UPPERCASE_SENTENCE_START", "PASSIVE_VOICE" },
 								["de-CH"] = { "UPPERCASE_SENTENCE_START" },
 							},
 							latex = {

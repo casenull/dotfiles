@@ -43,7 +43,29 @@ return {
 	},
 
 	{
+		"ThePrimeagen/refactoring.nvim",
+		keys = {
+			{
+				"<leader>rr",
+				function()
+					require("refactoring").select_refactor()
+				end,
+				"v",
+				desc = "Prompt for refactor",
+			},
+		},
+	},
+
+	{
 		"folke/zen-mode.nvim",
 		cmd = "ZenMode",
+	},
+
+	{
+		"jbyuki/instant.nvim",
+		lazy = false,
+		config = function()
+			vim.cmd("let g:instant_username = 'casenull'")
+		end,
 	},
 }
