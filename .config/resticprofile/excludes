@@ -1,0 +1,11 @@
+/home/*/.local/share
+/home/*/Nextcloud/ost
+/home/*/Downloads
+/home/*/.cache
+/home/*/.config/protonmail/bridge/cache
+/home/*/.config/VSCodium/Cache
+/home/*/.config/VSCodium/CachedData
+/home/*/.config/VSCodium/CachedExtensions
+/home/*/.config/VSCodium/CachedExtensionsVSIXs
+/home/*/.config/VSCodium/Code Cache
+/home/*/.vscode-oss
