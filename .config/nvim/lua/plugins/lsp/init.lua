@@ -85,6 +85,7 @@ return {
 						},
 					},
 				},
+				taplo = {},
 			},
 			-- you can do any additional lsp server setup here (and?) return true if you don't want this server to be setup with lspconfig
 			setup = {
