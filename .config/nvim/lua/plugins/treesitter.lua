@@ -15,9 +15,9 @@ return {
 				"gitattributes",
 				"gitcommit",
 				"gitignore",
-				"help",
 				"comment",
 				"diff",
+				"vimdoc",
 				-- Config
 				"bash",
 				"cmake",

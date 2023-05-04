@@ -1,21 +1,17 @@
 return {
 	{
-		"jay-babu/mason-nvim-dap.nvim",
+		"mfussenegger/nvim-dap",
 		dependencies = {
-			"mfussenegger/nvim-dap",
 			"rcarriga/nvim-dap-ui",
+			"jay-babu/mason-nvim-dap.nvim",
+			"leoluz/nvim-dap-go",
+			"mxsdev/nvim-dap-vscode-js",
 		},
 		init = function()
 			local dap, dapui = require("dap"), require("dapui")
 			dap.listeners.after.event_initialized["dapui_config"] = function()
 				dapui.open()
 			end
-			-- dap.listeners.before.event_terminated["dapui_config"] = function()
-			-- 	dapui.close()
-			-- end
-			-- dap.listeners.before.event_exited["dapui_config"] = function()
-			-- 	dapui.close()
-			-- end
 		end,
 		keys = {
 			-- stylua: ignore
@@ -37,22 +33,20 @@ return {
 			-- stylua: ignore
 			{ "<leader>dt", function() require("dap").terminate() end, desc = "DAP Terminate" },
 		},
-		opts = {
-			ensure_installed = {
-				"javadbg",
-				"javatest",
-				"python",
-				"delve",
-			},
-			automatic_setup = true,
-		},
-		config = function(_, opts)
-			require("mason-nvim-dap").setup(opts)
-
-			require("mason-nvim-dap").setup_handlers({
-				function(source_name)
-					require("mason-nvim-dap.automatic_setup")(source_name)
-				end,
+		config = function()
+			require("mason-nvim-dap").setup({
+				ensure_installed = {
+					"javadbg",
+					"javatest",
+					"python",
+					"delve",
+				},
+				automatic_setup = true,
+				handlers = {
+					function(config)
+						require("mason-nvim-dap").default_setup(config)
+					end,
+				},
 			})
 
 			require("dapui").setup({
@@ -77,6 +71,29 @@ return {
 					},
 				},
 			})
+
+			require("dap-go").setup()
+
+			require("dap-vscode-js").setup({
+				debugger_path = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug",
+				adapters = { "pwa-node" },
+			})
+
+			for _, language in ipairs({ "typescript", "javascript" }) do
+				require("dap").configurations[language] = {
+					{
+						type = "pwa-node",
+						request = "launch",
+						name = "Launch file",
+						program = "${file}",
+						cwd = "${workspaceFolder}",
+					},
+				}
+			end
 		end,
+	},
+	{
+		"microsoft/vscode-js-debug",
+		build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
 	},
 }

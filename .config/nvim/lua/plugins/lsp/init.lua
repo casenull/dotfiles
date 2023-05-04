@@ -36,16 +36,20 @@ return {
 				timeout_ms = nil,
 			},
 			servers = {
-				ansiblels = {},
 				terraformls = {},
 				tflint = {},
-				bashls = {},
 				cssls = {},
 				eslint = {},
 				html = {},
 				pyright = {},
 				texlab = {},
-				yamlls = {},
+				yamlls = {
+					settings = {
+						yaml = {
+							keyOrdering = false,
+						},
+					},
+				},
 				clangd = {},
 				gopls = {},
 				rust_analyzer = {},
@@ -122,8 +126,7 @@ return {
 			end)
 
 			local servers = opts.servers
-			local capabilities =
-				require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+			local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 			require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })
 			require("mason-lspconfig").setup_handlers({
