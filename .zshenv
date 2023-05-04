@@ -10,3 +10,4 @@ for file in $(find $HOME/.kube/ -type f -name "*.yml" -o -name "*.yaml")
 do
     export KUBECONFIG="$file:$KUBECONFIG"
 done
+export QMK_HOME="$HOME/.local/share/qmk_firmware"
