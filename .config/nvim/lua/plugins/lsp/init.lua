@@ -160,6 +160,7 @@ return {
 				sources = {
 					null_ls.builtins.formatting.prettier,
 					null_ls.builtins.formatting.stylua,
+					null_ls.builtins.formatting.shfmt,
 				},
 			}
 		end,
@@ -172,6 +173,7 @@ return {
 			ensure_installed = {
 				"prettier",
 				"stylua",
+				"shfmt",
 			},
 		},
 		config = function(_, opts)
