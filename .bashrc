@@ -20,26 +20,44 @@ viewcert() {
 	openssl x509 -in "$1" -noout -text
 }
 
+# History: No duplicate lines or ones starting with space, append sizes, update window
+HISTCONTROL=ignoreboth
+shopt -s histappend
+HISTSIZE=10000
+HISTFILESIZE=10000
+shopt -s checkwinsize
+
 # Prompt
 source "/usr/share/git/git-prompt.sh"
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWCOLORHINTS=1
 
-__txtboldred="\e[1;31m"
-__txtboldgreen="\e[1;32m"
-__txtcyan="\e[0;36m"
-__txtsilver="\e[0;37m"
+function set_prompt() {
+	local last_exit_code=$?
 
-__txtreset="\e[0m"
+	local cyan="\[\e[0;36m\]"
+	local silver="\[\e[0;37m\]"
+	local boldred="\[\e[1;31m\]"
+	local boldgreen="\[\e[1;32m\]"
+	local reset="\[\e[0m\]"
 
-__curdir="${__txtcyan}\W${__txtreset}"
+	local curdir="${cyan}\W${reset}"
 
-function __exitstate {
-	if [ $? -eq 0 ]; then
-		echo -ne "${__txtboldgreen}>${__txtreset}"
+	if [[ -n "$VIRTUAL_ENV" ]]; then
+		local venv="${boldgreen}($(basename $VIRTUAL_ENV))${reset} "
 	else
-		echo -ne "${__txtboldred}>${__txtreset}"
+		local venv=""
 	fi
+
+	if [ $last_exit_code -ne 0 ]; then
+		local statussign="${boldred}>${reset}"
+	else
+		local statussign="${boldgreen}>${reset}"
+	fi
+
+	local gitsign=$(__git_ps1 "${silver}%s${reset} ")
+
+	PS1="${venv}${curdir} ${gitsign}${statussign} "
 }
 
-PS1="${__curdir}\$(__git_ps1 ' ${__txtsilver}%s${__txtreset}') \$(__exitstate) "
+PROMPT_COMMAND="set_prompt"
