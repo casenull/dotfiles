@@ -9,13 +9,10 @@ indent_size = 2
 indent_style = tab
 insert_final_newline = true
 
-[*.{yaml,yml}]
+[*.{yaml,yml,md}]
 indent_style = space
 
-[*.{py,md}]
+[*.{rs,py}]
 indent_style = space
 indent_size = 4
-
-[*.{html,css,js}]
-indent_style = space
 

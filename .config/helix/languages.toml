@@ -1,0 +1,9 @@
+# Do these also work when the first LSP is not installed? See after release.
+
+[[language]]
+name = "markdown"
+language-servers = [ "marksman", "ltex-ls" ]
+
+[[language]]
+name = "latex"
+language-servers = [ "texlab", "ltex-ls" ]
