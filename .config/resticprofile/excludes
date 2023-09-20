@@ -9,6 +9,5 @@
 /home/*/.config/VSCodium/CachedExtensionsVSIXs
 /home/*/.config/VSCodium/Code Cache
 /home/*/.vscode-oss
-/home/*/.rustup
-/home/*/.cargo
 /home/*/.npm
+/home/*/.var

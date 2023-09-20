@@ -6,6 +6,7 @@ export EDITOR="hx"
 export VISUAL="hx"
 export GOPATH="$HOME/.local/share/go"
 export CARGO_HOME="$HOME/.local/share/cargo"
+export RUSTUP_HOME="$HOME/.local/share/rustup"
 export PGHOST="localhost"
 export PATH="$PATH:$HOME/.local/bin:$CARGO_HOME/bin:$GOPATH/bin"
 export KEYTIMEOUT=1

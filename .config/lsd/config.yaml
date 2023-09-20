@@ -1,33 +1,6 @@
 ---
-classic: false
-blocks:
-  - permission
-  - user
-  - group
-  - size
-  - date
-  - name
-color:
-  when: auto
-  theme: default
-date: date
-dereference: false
 icons:
-  when: auto
-  theme: fancy
-  separator: "  "
-indicators: false
-layout: grid
-recursion:
-  enabled: false
-size: default
-permission: rwx
+  when: never
 sorting:
-  column: name
-  reverse: false
   dir-grouping: first
-no-symlink: false
-total-size: false
-hyperlink: never
 symlink-arrow: ">"
-header: false
