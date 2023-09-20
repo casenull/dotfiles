@@ -7,3 +7,5 @@ language-servers = [ "marksman", "ltex-ls" ]
 [[language]]
 name = "latex"
 language-servers = [ "texlab", "ltex-ls" ]
+formatter = { command = "latexindent" }
+auto-format = true

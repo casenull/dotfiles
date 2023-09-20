@@ -1,5 +1,5 @@
-export EDITOR="nvim"
-export VISUAL="nvim"
+export EDITOR="hx"
+export VISUAL="hx"
 export GOPATH="$HOME/.local/share/go"
 export CARGO_HOME="$HOME/.local/share/cargo"
 export PGHOST="localhost"
