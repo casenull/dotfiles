@@ -9,3 +9,8 @@ name = "latex"
 language-servers = [ "texlab", "ltex-ls" ]
 formatter = { command = "latexindent" }
 auto-format = true
+
+[[language]]
+name = "bash"
+formatter = { command = "shfmt" }
+auto-format = true

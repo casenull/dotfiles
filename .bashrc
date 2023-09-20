@@ -2,6 +2,22 @@
 
 [ "$TERM" = "xterm-kitty" ] && alias ssh="TERM=xterm-256color ssh"
 
+export EDITOR="hx"
+export VISUAL="hx"
+export GOPATH="$HOME/.local/share/go"
+export CARGO_HOME="$HOME/.local/share/cargo"
+export PGHOST="localhost"
+export PATH="$PATH:$HOME/.local/bin:$CARGO_HOME/bin:$GOPATH/bin"
+export KEYTIMEOUT=1
+export KUBECONFIG=""
+
+if [ -d "$HOME/.kube" ]; then
+	for file in $(find $HOME/.kube/ -type f -name "*.yml" -o -name "*.yaml"); do
+		export KUBECONFIG="$file:$KUBECONFIG"
+	done
+fi
+export QMK_HOME="$HOME/.local/share/qmk_firmware"
+
 function cmd_exists() {
 	which "$1" &>/dev/null
 }
