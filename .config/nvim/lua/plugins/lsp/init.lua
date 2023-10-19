@@ -41,15 +41,9 @@ return {
 				cssls = {},
 				eslint = {},
 				html = {},
-				pyright = {},
+				ansiblels = {},
+				helm_ls = {},
 				texlab = {},
-				yamlls = {
-					settings = {
-						yaml = {
-							keyOrdering = false,
-						},
-					},
-				},
 				clangd = {},
 				gopls = {},
 				rust_analyzer = {},
@@ -90,6 +84,12 @@ return {
 					},
 				},
 				taplo = {},
+				typst_lsp = {
+					settings = {
+						exportPdf = "onSave", -- Choose onType, onSave or never.
+						-- serverPath = "" -- Normally, there is no need to uncomment it.
+					},
+				},
 			},
 			-- you can do any additional lsp server setup here (and?) return true if you don't want this server to be setup with lspconfig
 			setup = {
@@ -161,6 +161,8 @@ return {
 					null_ls.builtins.formatting.prettier,
 					null_ls.builtins.formatting.stylua,
 					null_ls.builtins.formatting.shfmt,
+					null_ls.builtins.formatting.rustfmt,
+					null_ls.builtins.diagnostics.hadolint,
 				},
 			}
 		end,
@@ -174,6 +176,8 @@ return {
 				"prettier",
 				"stylua",
 				"shfmt",
+				"hadolint",
+				"ansible-lint",
 			},
 		},
 		config = function(_, opts)

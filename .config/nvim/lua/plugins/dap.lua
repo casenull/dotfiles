@@ -17,6 +17,8 @@ return {
 			-- stylua: ignore
 			{ "<leader>du", function() require("dapui").toggle() end, desc = "DAP UI Toggle" },
 			-- stylua: ignore
+			{ "<leader>dK", function() require("dapui").eval() end, desc = "DAP UI Eval" },
+			-- stylua: ignore
 			{ "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "DAP Toggle Breakpoint" },
 			-- stylua: ignore
 			{ "<leader>dc", function() require("dap").continue() end, desc = "DAP Continue" },

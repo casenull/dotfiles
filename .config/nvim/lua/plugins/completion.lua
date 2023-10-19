@@ -28,9 +28,7 @@ return {
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<CR>"] = cmp.mapping.confirm({ select = false }),
 					["<Tab>"] = cmp.mapping(function(fallback)
-						if luasnip.expandable() then
-							luasnip.expand()
-						elseif luasnip.expand_or_jumpable() then
+						if luasnip.jumpable() then
 							luasnip.expand_or_jump()
 						else
 							fallback()
@@ -40,7 +38,7 @@ return {
 						"s",
 					}),
 					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if luasnip.expand_or_jumpable(-1) then
+						if luasnip.jumpable(-1) then
 							luasnip.jump(-1)
 						else
 							fallback()

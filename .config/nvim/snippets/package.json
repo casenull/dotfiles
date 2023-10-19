@@ -8,6 +8,13 @@
 					"tex"
 				],
 				"path": "latex.json"
+			},
+			{
+				"language": [
+					"markdown",
+					"rmd"
+				],
+				"path": "markdown.json"
 			}
 		]
 	}
