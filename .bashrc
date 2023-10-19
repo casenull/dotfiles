@@ -33,6 +33,10 @@ if cmd_exists xdg-open; then
 	alias open="xdg-open"
 fi
 
+mvn-init() {
+	mvn archetype:generate -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4
+}
+
 viewcert() {
 	openssl x509 -in "$1" -noout -text
 }

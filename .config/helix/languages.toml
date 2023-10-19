@@ -1,16 +1,61 @@
 # Do these also work when the first LSP is not installed? See after release.
+# Are all the 'auto-format' statements needed?
 
 [[language]]
 name = "markdown"
-language-servers = [ "marksman", "ltex-ls" ]
+language-servers = ["marksman", "ltex-ls"]
+formatter = { command = "prettier", args = ["--parser", "markdown"] }
+auto-format = true
 
 [[language]]
 name = "latex"
-language-servers = [ "texlab", "ltex-ls" ]
-formatter = { command = "latexindent" }
+language-servers = ["texlab", "ltex-ls"]
+formatter = { command = "latexindent", args = ["-g=/tmp/"] }
 auto-format = true
 
 [[language]]
 name = "bash"
 formatter = { command = "shfmt" }
 auto-format = true
+
+[[language]]
+name = "yaml"
+formatter = { command = "prettier", args = ["--parser", "yaml"] }
+auto-format = true
+
+[[language]]
+name = "html"
+formatter = { command = "prettier", args = ["--parser", "html"] }
+auto-format = true
+
+[[language]]
+name = "css"
+formatter = { command = "prettier", args = ["--parser", "css"] }
+auto-format = true
+
+[[language]]
+name = "typst"
+language-servers = ["typst-lsp"]
+scope = "source.typst"
+injection-regex = "^typ(st)?$"
+file-types = ["typ"]
+comment-token = "//"
+indent = { tab-width = 2, unit = "  " }
+roots = ["typst.toml"]
+
+[language-server.typst-lsp]
+command = "typst-lsp"
+config = { exportPdf = "onSave" } # experimentalFormatterMode = "on"
+
+[[grammar]]
+name = "typst"
+source = { git = "https://github.com/uben0/tree-sitter-typst", rev = "7a2bb249fc555dbcba7d440709927614b8802969" }
+
+[[language]]
+name = "toml"
+formatter = { command = "taplo", args = ["format", "-"] }
+auto-format = true
+
+[[language]]
+name = "java"
+formatter = { command = "google-java-format", args = ["-"] }
