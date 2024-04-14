@@ -3,6 +3,7 @@ theme = "adwaita-dark"
 [editor]
 mouse = false
 completion-trigger-len = 1
+bufferline = "always"
 
 [editor.cursor-shape]
 insert = "bar"

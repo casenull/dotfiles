@@ -33,6 +33,10 @@ if cmd_exists xdg-open; then
 	alias open="xdg-open"
 fi
 
+if cmd_exists cilium-cli; then
+	alias cilium="cilium-cli"
+fi
+
 mvn-init() {
 	mvn archetype:generate -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4
 }

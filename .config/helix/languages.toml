@@ -1,10 +1,17 @@
-# Do these also work when the first LSP is not installed? See after release.
 # Are all the 'auto-format' statements needed?
+
+[[language]]
+name = "go"
+indent = { tab-width = 2, unit = "\t" }
 
 [[language]]
 name = "markdown"
 language-servers = ["marksman", "ltex-ls"]
-formatter = { command = "prettier", args = ["--parser", "markdown"] }
+formatter = { command = "prettier", args = [
+  "--parser",
+  "markdown",
+  "--use-tabs",
+] }
 auto-format = true
 
 [[language]]
@@ -12,6 +19,7 @@ name = "latex"
 language-servers = ["texlab", "ltex-ls"]
 formatter = { command = "latexindent", args = ["-g=/tmp/"] }
 auto-format = true
+indent = { tab-width = 2, unit = "\t" }
 
 [[language]]
 name = "bash"
@@ -20,36 +28,31 @@ auto-format = true
 
 [[language]]
 name = "yaml"
-formatter = { command = "prettier", args = ["--parser", "yaml"] }
+formatter = { command = "yamlfmt", args = [
+  "-formatter",
+  "include_document_start=true,indentless_arrays=true",
+  "-",
+] }
 auto-format = true
 
 [[language]]
 name = "html"
-formatter = { command = "prettier", args = ["--parser", "html"] }
+formatter = { command = "prettier", args = ["--parser", "html", "--use-tabs"] }
 auto-format = true
 
 [[language]]
 name = "css"
-formatter = { command = "prettier", args = ["--parser", "css"] }
+formatter = { command = "prettier", args = ["--parser", "css", "--use-tabs"] }
 auto-format = true
 
 [[language]]
-name = "typst"
-language-servers = ["typst-lsp"]
-scope = "source.typst"
-injection-regex = "^typ(st)?$"
-file-types = ["typ"]
-comment-token = "//"
-indent = { tab-width = 2, unit = "  " }
-roots = ["typst.toml"]
-
-[language-server.typst-lsp]
-command = "typst-lsp"
-config = { exportPdf = "onSave" } # experimentalFormatterMode = "on"
-
-[[grammar]]
-name = "typst"
-source = { git = "https://github.com/uben0/tree-sitter-typst", rev = "7a2bb249fc555dbcba7d440709927614b8802969" }
+name = "javascript"
+formatter = { command = "prettier", args = [
+  "--parser",
+  "typescript",
+  "--use-tabs",
+] }
+auto-format = true
 
 [[language]]
 name = "toml"
@@ -58,4 +61,15 @@ auto-format = true
 
 [[language]]
 name = "java"
-formatter = { command = "google-java-format", args = ["-"] }
+auto-format = true
+
+[[language-server.jdtls.config.java]]
+format = { enabled = true }
+
+[[language]]
+name = "haskell"
+auto-format = true
+
+[[language]]
+name = "python"
+auto-format = true
