@@ -30,7 +30,7 @@ auto-format = true
 name = "yaml"
 formatter = { command = "yamlfmt", args = [
   "-formatter",
-  "include_document_start=true,indentless_arrays=true",
+  "include_document_start=true,indentless_arrays=true,retain_line_breaks=true,scan_folded_as_literal=true",
   "-",
 ] }
 auto-format = true
