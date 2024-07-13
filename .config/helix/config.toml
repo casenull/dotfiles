@@ -1,4 +1,4 @@
-theme = "adwaita-dark"
+theme = "custom"
 
 [editor]
 mouse = false
@@ -12,6 +12,7 @@ select = "underline"
 
 [editor.soft-wrap]
 enable = true
+wrap-indicator = ""
 
 [editor.file-picker]
 hidden = false

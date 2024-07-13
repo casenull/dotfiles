@@ -1,8 +1,32 @@
 # Are all the 'auto-format' statements needed?
 
+# LSP Settings
+
+[language-server.ltex-ls.config.ltex]
+language = "en-GB"
+additionalRules.enablePickyRules = true
+disabledRules = { "en-GB" = ["PROFANITY", "DASH_RULE", "TWO_HYPHENS"] }
+latex.commands = { "\\gls{}" = "default" }
+
+[[language-server.jdtls.config.java]]
+format = { enabled = true }
+
+# Language Behaviour
+
+[[language]]
+name = "handlebars"
+scope = "source.hbs"
+file-types = ["hbs"]
+formatter = { command = "prettier", args = [
+  "--parser",
+  "glimmer",
+  "--use-tabs",
+] }
+auto-format = true
+
 [[language]]
 name = "go"
-indent = { tab-width = 2, unit = "\t" }
+language-servers = ["gopls", "golangci-lint-lsp"]
 
 [[language]]
 name = "markdown"
@@ -55,6 +79,15 @@ formatter = { command = "prettier", args = [
 auto-format = true
 
 [[language]]
+name = "typescript"
+formatter = { command = "prettier", args = [
+  "--parser",
+  "typescript",
+  "--use-tabs",
+] }
+auto-format = true
+
+[[language]]
 name = "toml"
 formatter = { command = "taplo", args = ["format", "-"] }
 auto-format = true
@@ -63,9 +96,6 @@ auto-format = true
 name = "java"
 auto-format = true
 
-[[language-server.jdtls.config.java]]
-format = { enabled = true }
-
 [[language]]
 name = "haskell"
 auto-format = true
@@ -73,3 +103,12 @@ auto-format = true
 [[language]]
 name = "python"
 auto-format = true
+
+[[language]]
+name = "sql"
+formatter = { command = "pg_format", args = ["-"] }
+auto-format = true
+
+[[language]]
+name = "nasm"
+indent = { tab-width = 2, unit = "  " }

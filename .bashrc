@@ -1,5 +1,3 @@
-#!/usr/bin/bash
-
 [ "$TERM" = "xterm-kitty" ] && alias ssh="TERM=xterm-256color ssh"
 
 export EDITOR="hx"
@@ -7,13 +5,16 @@ export VISUAL="hx"
 export GOPATH="$HOME/.local/share/go"
 export CARGO_HOME="$HOME/.local/share/cargo"
 export RUSTUP_HOME="$HOME/.local/share/rustup"
+export BUN_INSTALL="$HOME/.bun" # https://github.com/oven-sh/bun/issues/1678
+export PATH="$PATH:$HOME/.local/bin:$CARGO_HOME/bin:$GOPATH/bin:$BUN_INSTALL/bin"
+export GHCUP_USE_XDG_DIRS="non-empty"
+export STACK_XDG="non-empty"
 export PGHOST="localhost"
-export PATH="$PATH:$HOME/.local/bin:$CARGO_HOME/bin:$GOPATH/bin"
 export KEYTIMEOUT=1
 export KUBECONFIG=""
 
 if [ -d "$HOME/.kube" ]; then
-	for file in $(find $HOME/.kube/ -type f -name "*.yml" -o -name "*.yaml"); do
+	for file in "$HOME/.kube/"*.{yml,yaml}; do
 		export KUBECONFIG="$file:$KUBECONFIG"
 	done
 fi
@@ -31,6 +32,10 @@ fi
 
 if cmd_exists xdg-open; then
 	alias open="xdg-open"
+fi
+
+if cmd_exists svgo; then
+	alias svgo="svgo --pretty"
 fi
 
 if cmd_exists cilium-cli; then
