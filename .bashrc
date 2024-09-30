@@ -58,7 +58,8 @@ HISTFILESIZE=10000
 shopt -s checkwinsize
 
 # Prompt
-source "/usr/share/git/git-prompt.sh"
+# source "/usr/share/git/git-prompt.sh" # Arch Linux
+source "/usr/lib/git-core/git-sh-prompt"
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWCOLORHINTS=1
 
