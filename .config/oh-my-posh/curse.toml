@@ -1,0 +1,93 @@
+version = 3
+final_space = true
+
+[upgrade]
+source = "github"
+interval = "72h"
+auto = false
+notice = true
+
+# Left
+
+[[blocks]]
+type = "prompt"
+alignment = "left"
+
+  [[blocks.segments]]
+  type = "path"
+  style = "plain"
+  foreground = "cyan"
+  background = "transparent"
+  template = "{{ .Path }}"
+  properties = { style = "folder" }
+
+  [[blocks.segments]]
+  type = "text"
+  style = "plain"
+  foreground_templates = [
+    "{{ if gt .Code 0 }}red{{ end }}",
+    "{{ if eq .Code 0 }}green{{ end }}",
+  ]
+  background = "transparent"
+  template = " >"
+
+[secondary_prompt]
+foreground = "darkGray"
+background = "transparent"
+template = "> "
+
+# Right (Info will be replaced by prompt or tooltips)
+
+[[blocks]]
+type = "rprompt"
+overflow = "hidden"
+
+  [[blocks.segments]]
+  type = "executiontime"
+  style = "plain"
+  foreground = "yellow"
+  background = "transparent"
+  template = "{{ .FormattedMs }}"
+  properties = { threshold = 5000 }
+
+  [[blocks.segments]]
+  type = "git"
+  style = "plain"
+  foreground = "darkGray"
+  background = "transparent"
+  template = " ({{ .HEAD }}{{ if .Working.Changed }} <red>{{ .Working.String}}</>{{ end }}{{ if .Staging.Changed }} <green>{{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }} <yellow>{{ .StashCount }}</>{{ end }})"
+  properties = { branch_icon = "", commit_icon = "", fetch_status = true, fetch_stash_count = true }
+
+  [[blocks.segments]]
+  type = "nix-shell"
+  style = "plain"
+  foreground = "darkGray"
+  background = "transparent"
+  template = " nix({{ .Type }})"
+
+  [[blocks.segments]]
+  # Default: Only active in virtual environment
+  type = "python"
+  style = "plain"
+  foreground = "darkGray"
+  background = "transparent"
+  template = "{{ if .Venv }} ({{ .Venv }}){{ end }}"
+  properties = { folder_name_fallback = false, home_enabled = true }
+
+  ## Tooltips
+
+[[tooltips]]
+type = "talosctl"
+tips = ["talosctl"]
+style = "plain"
+foreground = "blue"
+background = "transparent"
+template = "{{ .Context }}"
+
+[[tooltips]]
+type = "kubectl"
+tips = ["kubectl"]
+style = "plain"
+foreground = "lightBlue"
+background = "transparent"
+template = "{{.Context}}{{if .Namespace}}:{{.Namespace}}{{end}}"

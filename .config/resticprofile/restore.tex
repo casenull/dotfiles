@@ -1,0 +1,87 @@
+\documentclass[a4paper,fontsize=11pt]{scrartcl}
+
+\def\envfile{\string~/.config/resticprofile/env}
+\def\keyfile{\string~/.config/resticprofile/password.txt}
+
+\usepackage[
+	includeheadfoot,
+	inner=2cm,
+	outer=2cm,
+	top=2cm,
+	bottom=2cm
+]{geometry}
+
+\usepackage[T1]{fontenc}
+\usepackage[mono,TTstyle=Semibold]{plex-otf}
+\setlength{\parindent}{0mm}
+\setlength{\parskip}{0.5em}
+
+\usepackage{listings}
+\lstset{
+	basicstyle=\ttfamily,
+	breaklines=true,
+	breakindent=0mm,
+	frame=leftline,
+	framerule=1pt,
+	xleftmargin=3mm,
+	framexleftmargin=3mm,
+}
+
+\usepackage{catchfile}
+\usepackage{seqsplit}
+\newcommand{\verbfile}[1]{%
+	\noindent\texttt{%
+	\CatchFileDef{\sequence}{#1}{\endlinechar=-1}%
+	\expandafter\seqsplit\expandafter{\sequence}%
+}}
+
+\usepackage{qrcode}
+\qrset{height=8cm}
+\newcommand{\qrfile}[1]{%
+	\CatchFileDef{\sequence}{#1}{\endlinechar=-1}%
+	\expandafter\qrcode\expandafter{\sequence}%
+}
+
+\begin{document}
+\pagestyle{empty}
+
+\section*{Rainy Day Backup Configuration}
+
+Dependencies: \lstinline{git, stow, restic, resticprofile}
+
+Then, run the following in a console:
+
+\begin{lstlisting}[language=bash]
+cd
+git clone https://github.com/casenull/dotfiles.git
+cd dotfiles
+stow .
+\end{lstlisting}
+
+Now, change the secrets so the keys and repository match.
+
+\textbf{The secret content is on the back of this document.}
+
+Finally, chose a snapshot and restore it:
+
+\begin{lstlisting}[language=bash]
+resticprofile snapshots
+resticprofile restore <snapshot_id> --include <what> --target <where_to>
+\end{lstlisting}
+
+\pagebreak
+
+\subsection*{Secret Configuration}
+
+\lstinputlisting[caption={\envfile}]{\envfile}
+
+\begin{figure}[h!]
+	\caption{\keyfile}
+	\begin{center}
+		\qrfile{\keyfile}
+	\end{center}
+\end{figure}
+
+\verbfile{\keyfile}
+
+\end{document}

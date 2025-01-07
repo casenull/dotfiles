@@ -3,4 +3,4 @@ icons:
   when: never
 sorting:
   dir-grouping: first
-symlink-arrow: ">"
+symlink-arrow: "->"

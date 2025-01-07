@@ -1,1 +1,4 @@
 .config/newsboat/urls
+.config/resticprofile/env
+.config/resticprofile/password.txt
+.config/resticprofile/restore.pdf

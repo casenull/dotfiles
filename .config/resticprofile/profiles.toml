@@ -2,29 +2,29 @@
 lock = "/tmp/resticprofile-profile-default.lock"
 force-inactive-lock = true
 initialize = true
-repository = "rclone:switchdrive:restic"
-password-file = "~/.pki/restic/backup.key"
+env-file = "~/.config/resticprofile/env"
+password-file = "~/.config/resticprofile/password.txt"
 
-[default.backup]
-source = ["/home/sh"]
-exclude-file = "excludes"
-exclude-caches = true
-schedule = "daily"
-schedule-permission = "user"
-schedule-lock-wait = "15m"
-run-after-fail = 'notify-send -u critical "RESTIC BACKUP FAILED"'
+  [default.backup]
+  source = ["/home/sh"]
+  exclude-file = "excludes"
+  exclude-caches = true
+  schedule = "daily"
+  schedule-permission = "user"
+  schedule-lock-wait = "15m"
+  run-after-fail = 'notify-send -u critical "RESTIC BACKUP FAILED"'
 
-[default.check]
-schedule = "daily"
-schedule-permission = "user"
-schedule-lock-wait = "15m"
+  [default.check]
+  schedule = "daily"
+  schedule-permission = "user"
+  schedule-lock-wait = "15m"
 
-[default.forget]
-keep-daily = 7
-keep-weekly = 8
-keep-monthly = 12
-keep-yearly = 10
-prune = true
-schedule = "daily"
-schedule-permission = "user"
-schedule-lock-wait = "15m"
+  [default.forget]
+  keep-daily = 7
+  keep-weekly = 8
+  keep-monthly = 12
+  keep-yearly = 10
+  prune = true
+  schedule = "daily"
+  schedule-permission = "user"
+  schedule-lock-wait = "15m"

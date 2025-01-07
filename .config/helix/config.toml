@@ -4,15 +4,21 @@ theme = "custom"
 mouse = false
 completion-trigger-len = 1
 bufferline = "always"
+end-of-line-diagnostics = "hint"
+continue-comments = false
 
-[editor.cursor-shape]
-insert = "bar"
-normal = "block"
-select = "underline"
+  [editor.cursor-shape]
+  insert = "bar"
+  normal = "block"
+  select = "underline"
 
-[editor.soft-wrap]
-enable = true
-wrap-indicator = ""
+  [editor.soft-wrap]
+  enable = true
+  wrap-indicator = ""
 
-[editor.file-picker]
-hidden = false
+  [editor.file-picker]
+  hidden = false
+
+  [editor.inline-diagnostics]
+  cursor-line = "error"
+  other-lines = "disable"

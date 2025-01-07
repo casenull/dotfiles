@@ -1,5 +1,3 @@
-[ "$TERM" = "xterm-kitty" ] && alias ssh="TERM=xterm-256color ssh"
-
 export EDITOR="hx"
 export VISUAL="hx"
 export GOPATH="$HOME/.local/share/go"
@@ -11,14 +9,14 @@ export GHCUP_USE_XDG_DIRS="non-empty"
 export STACK_XDG="non-empty"
 export PGHOST="localhost"
 export KEYTIMEOUT=1
-export KUBECONFIG=""
+export QMK_HOME="$HOME/.local/share/qmk_firmware"
 
+export KUBECONFIG=""
 if [ -d "$HOME/.kube" ]; then
 	for file in "$HOME/.kube/"*.{yml,yaml}; do
 		export KUBECONFIG="$file:$KUBECONFIG"
 	done
 fi
-export QMK_HOME="$HOME/.local/share/qmk_firmware"
 
 function cmd_exists() {
 	which "$1" &>/dev/null
@@ -34,17 +32,9 @@ if cmd_exists xdg-open; then
 	alias open="xdg-open"
 fi
 
-if cmd_exists svgo; then
-	alias svgo="svgo --pretty"
-fi
-
 if cmd_exists cilium-cli; then
 	alias cilium="cilium-cli"
 fi
-
-mvn-init() {
-	mvn archetype:generate -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4
-}
 
 viewcert() {
 	openssl x509 -in "$1" -noout -text
@@ -80,6 +70,12 @@ function set_prompt() {
 		local venv=""
 	fi
 
+	if [[ -n "$IN_NIX_SHELL" ]]; then
+		local nixshell="${boldgreen}(nix-shell)${reset} "
+	else
+		local nixshell=""
+	fi
+
 	if [ $last_exit_code -ne 0 ]; then
 		local statussign="${boldred}>${reset}"
 	else
@@ -88,7 +84,7 @@ function set_prompt() {
 
 	local gitsign=$(__git_ps1 "${silver}%s${reset} ")
 
-	PS1="${venv}${curdir} ${gitsign}${statussign} "
+	PS1="${nixshell}${venv}${curdir} ${gitsign}${statussign} "
 }
 
 PROMPT_COMMAND="set_prompt"
