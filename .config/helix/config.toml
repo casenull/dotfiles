@@ -4,7 +4,7 @@ theme = "custom"
 mouse = false
 completion-trigger-len = 1
 bufferline = "always"
-end-of-line-diagnostics = "hint"
+end-of-line-diagnostics = "warning"
 continue-comments = false
 
   [editor.cursor-shape]
