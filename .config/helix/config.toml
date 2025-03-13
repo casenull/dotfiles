@@ -1,10 +1,10 @@
 theme = "custom"
 
 [editor]
-mouse = false
+mouse = true
 completion-trigger-len = 1
 bufferline = "always"
-end-of-line-diagnostics = "warning"
+end-of-line-diagnostics = "disable"
 continue-comments = false
 
   [editor.cursor-shape]
@@ -20,5 +20,5 @@ continue-comments = false
   hidden = false
 
   [editor.inline-diagnostics]
-  cursor-line = "error"
+  cursor-line = "disable"
   other-lines = "disable"

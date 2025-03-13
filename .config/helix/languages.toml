@@ -11,6 +11,13 @@ disabledRules = { "en-GB" = [
   "TWO_HYPHENS",
   "PLUS_MINUS",
   "ELLIPSIS",
+  "EN_QUOTES",
+], "de-CH" = [
+  "TYPOGRAFISCHE_ANFUEHRUNGSZEICHEN_CH",
+  "TYPOGRAFISCHE_APOSTROPHE",
+  "MULTIPLICATION_SIGN",
+  "ABKUERZUNG_LEERZEICHEN",
+  "AUSLASSUNGSPUNKTE",
 ] }
 latex.commands = { "\\gls{}" = "default" }
 
