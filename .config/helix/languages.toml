@@ -2,7 +2,7 @@
 
 # LSP Settings
 
-[language-server.ltex-ls.config.ltex]
+[language-server.ltex-ls-plus.config.ltex]
 language = "en-GB"
 additionalRules.enablePickyRules = true
 disabledRules = { "en-GB" = [
@@ -43,7 +43,7 @@ language-servers = ["gopls", "golangci-lint-lsp"]
 
 [[language]]
 name = "markdown"
-language-servers = ["marksman", "ltex-ls"]
+language-servers = ["marksman", "ltex-ls-plus"]
 formatter = { command = "prettier", args = [
   "--parser",
   "markdown",
@@ -53,7 +53,7 @@ auto-format = true
 
 [[language]]
 name = "latex"
-language-servers = ["texlab", "ltex-ls"]
+language-servers = ["texlab", "ltex-ls-plus"]
 formatter = { command = "latexindent", args = ["-g=/tmp/"] }
 auto-format = true
 indent = { tab-width = 2, unit = "\t" }
@@ -63,11 +63,12 @@ name = "bash"
 formatter = { command = "shfmt" }
 auto-format = true
 
+# trim_trailing_whitespace fix: https://github.com/google/yamlfmt/issues/185#issuecomment-2186961227
 [[language]]
 name = "yaml"
 formatter = { command = "yamlfmt", args = [
   "-formatter",
-  "retain_line_breaks=true,scan_folded_as_literal=true",
+  "retain_line_breaks=true,scan_folded_as_literal=true,trim_trailing_whitespace=true",
   "-",
 ] }
 auto-format = true
