@@ -1,4 +1,4 @@
-# Are all the 'auto-format' statements needed?
+# TODO: Are all the 'auto-format' statements needed?
 
 # LSP Settings
 
@@ -35,6 +35,11 @@ formatter = { command = "prettier", args = [
   "glimmer",
   "--use-tabs",
 ] }
+auto-format = true
+
+[[language]]
+name = "json"
+formatter = { command = "prettier", args = ["--parser", "json", "--use-tabs"] }
 auto-format = true
 
 [[language]]
@@ -135,3 +140,31 @@ indent = { tab-width = 2, unit = "  " }
 [[language]]
 name = "nix"
 formatter = { command = "nixfmt" }
+
+
+[[language]]
+name = "hcl"
+formatter = { command = "tofu", args = ["fmt", "-"] }
+auto-format = true
+
+[[language]]
+name = "tfvars"
+formatter = { command = "tofu", args = ["fmt", "-"] }
+auto-format = true
+
+# Experimental: Grafana Alloy
+[[language]]
+name = "alloy"
+scope = "source.alloy"
+injection-regex = "alloy"
+file-types = ["alloy"]
+indent = { tab-width = 2, unit = "\t" }
+comment-token = "//"
+formatter = { command = "alloy", args = ["fmt", "-"] }
+auto-format = true
+grammar = "hcl"
+
+# [[grammar]]
+# name = "alloy"
+# source = { git = "https://github.com/Artemigos/tree-sitter-alloy", rev = "HEAD" }
+# source = { git = "https://github.com/applejag/tree-sitter-hcl", rev = "feature/identifier-dots-for-alloy" }

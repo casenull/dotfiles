@@ -1,9 +1,10 @@
 inherits = "dark_plus"
 
-# Remove ugly blue from statusline and bufferline
-"ui.statusline" = { bg = "dark_gray4" }
-"ui.statusline.inactive" = { bg = "dark_gray4" }
+# UI tweaks (transparent background, color adjustment)
+"ui.background" = { bg = "none" }
+"ui.statusline" = { bg = "none" }
 "ui.bufferline.active" = { bg = "#245b57" }
+"ui.bufferline.background" = { bg = "none" }
 
 # Highlight fuzzy-find search text
 "special" = { modifiers = ["dim"] }
