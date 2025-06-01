@@ -2,6 +2,15 @@
 
 # LSP Settings
 
+[language-server.golangci-lint-lsp.config]
+command = [
+  "golangci-lint",
+  "run",
+  "--output.json.path=stdout",
+  "--show-stats=false",
+  "--issues-exit-code=1",
+]
+
 [language-server.ltex-ls-plus.config.ltex]
 language = "en-GB"
 additionalRules.enablePickyRules = true
@@ -45,6 +54,8 @@ auto-format = true
 [[language]]
 name = "go"
 language-servers = ["gopls", "golangci-lint-lsp"]
+auto-format = true
+formatter = { command = "goimports" }
 
 [[language]]
 name = "markdown"

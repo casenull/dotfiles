@@ -5,7 +5,7 @@ font-family = "IBM Plex Mono"
 font-style = "Semibold"
 font-feature = "-liga"
 
-background-opacity = 0.96
+background-opacity = 0.9
 
 # Thicc cursor that does not change
 cursor-style = bar
