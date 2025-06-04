@@ -27,6 +27,7 @@ else
 	selected=$(
 		(
 			find ~/git ~/Documents ~/Documents/ost/99_past -mindepth 1 -maxdepth 1 -type d
+			find ~/Documents -mindepth 1 -maxdepth 1 -type l
 			echo ~/dotfiles
 		) | fzf
 	)
