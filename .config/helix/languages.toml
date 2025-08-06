@@ -1,6 +1,10 @@
-# TODO: Are all the 'auto-format' statements needed?
+# Languages
 
-# LSP Settings
+[[language]]
+name = "go"
+language-servers = ["gopls", "golangci-lint-lsp"]
+formatter = { command = "goimports" }
+auto-format = true
 
 [language-server.golangci-lint-lsp.config]
 command = [
@@ -10,6 +14,36 @@ command = [
   "--show-stats=false",
   "--issues-exit-code=1",
 ]
+
+[[language]]
+name = "bash"
+formatter = { command = "shfmt" }
+auto-format = true
+
+[[language]]
+name = "python"
+auto-format = true
+
+# Documentation
+
+[[language]]
+name = "markdown"
+language-servers = ["marksman", "ltex-ls-plus"]
+formatter = { command = "prettier", args = [
+  "--parser",
+  "markdown",
+  "--use-tabs",
+] }
+auto-format = true
+
+[[language]]
+name = "latex"
+language-servers = ["texlab", "ltex-ls-plus"]
+indent = { tab-width = 2, unit = "\t" }
+formatter = { command = "latexindent", args = ["--cruft=/tmp/"] }
+# Switch to `tex-fmt` as soon as tables are supported
+# formatter = { command = "tex-fmt", args = ["--stdin", "--nowrap", "--usetabs", "--tabsize", "1"] }
+auto-format = true
 
 [language-server.ltex-ls-plus.config.ltex]
 language = "en-GB"
@@ -30,54 +64,7 @@ disabledRules = { "en-GB" = [
 ] }
 latex.commands = { "\\gls{}" = "default" }
 
-[[language-server.jdtls.config.java]]
-format = { enabled = true }
-
-# Language Behaviour
-
-[[language]]
-name = "handlebars"
-scope = "source.hbs"
-file-types = ["hbs"]
-formatter = { command = "prettier", args = [
-  "--parser",
-  "glimmer",
-  "--use-tabs",
-] }
-auto-format = true
-
-[[language]]
-name = "json"
-formatter = { command = "prettier", args = ["--parser", "json", "--use-tabs"] }
-auto-format = true
-
-[[language]]
-name = "go"
-language-servers = ["gopls", "golangci-lint-lsp"]
-auto-format = true
-formatter = { command = "goimports" }
-
-[[language]]
-name = "markdown"
-language-servers = ["marksman", "ltex-ls-plus"]
-formatter = { command = "prettier", args = [
-  "--parser",
-  "markdown",
-  "--use-tabs",
-] }
-auto-format = true
-
-[[language]]
-name = "latex"
-language-servers = ["texlab", "ltex-ls-plus"]
-formatter = { command = "latexindent", args = ["-g=/tmp/"] }
-auto-format = true
-indent = { tab-width = 2, unit = "\t" }
-
-[[language]]
-name = "bash"
-formatter = { command = "shfmt" }
-auto-format = true
+# Config
 
 # trim_trailing_whitespace fix: https://github.com/google/yamlfmt/issues/185#issuecomment-2186961227
 [[language]]
@@ -88,6 +75,37 @@ formatter = { command = "yamlfmt", args = [
   "-",
 ] }
 auto-format = true
+
+[[language]]
+name = "toml"
+formatter = { command = "taplo", args = [
+  "format",
+  "--option",
+  "indent_tables=true",
+  "-",
+] }
+auto-format = true
+
+[[language]]
+name = "json"
+formatter = { command = "prettier", args = ["--parser", "json", "--use-tabs"] }
+auto-format = true
+
+[[language]]
+name = "nix"
+formatter = { command = "nixfmt" }
+
+[[language]]
+name = "hcl"
+formatter = { command = "tofu", args = ["fmt", "-"] }
+auto-format = true
+
+[[language]]
+name = "tfvars"
+formatter = { command = "tofu", args = ["fmt", "-"] }
+auto-format = true
+
+# Web
 
 [[language]]
 name = "html"
@@ -118,30 +136,26 @@ formatter = { command = "prettier", args = [
 auto-format = true
 
 [[language]]
-name = "toml"
-formatter = { command = "taplo", args = [
-  "format",
-  "--option",
-  "indent_tables=true",
-  "-",
+name = "handlebars"
+scope = "source.hbs"
+file-types = ["hbs"]
+formatter = { command = "prettier", args = [
+  "--parser",
+  "glimmer",
+  "--use-tabs",
 ] }
 auto-format = true
+# Experimental
 
 [[language]]
 name = "java"
 auto-format = true
 
+[[language-server.jdtls.config.java]]
+format = { enabled = true }
+
 [[language]]
 name = "haskell"
-auto-format = true
-
-[[language]]
-name = "python"
-auto-format = true
-
-[[language]]
-name = "sql"
-formatter = { command = "pg_format", args = ["-"] }
 auto-format = true
 
 [[language]]
@@ -149,33 +163,12 @@ name = "nasm"
 indent = { tab-width = 2, unit = "  " }
 
 [[language]]
-name = "nix"
-formatter = { command = "nixfmt" }
-
-
-[[language]]
-name = "hcl"
-formatter = { command = "tofu", args = ["fmt", "-"] }
-auto-format = true
-
-[[language]]
-name = "tfvars"
-formatter = { command = "tofu", args = ["fmt", "-"] }
-auto-format = true
-
-# Experimental: Grafana Alloy
-[[language]]
 name = "alloy"
 scope = "source.alloy"
 injection-regex = "alloy"
 file-types = ["alloy"]
 indent = { tab-width = 2, unit = "\t" }
 comment-token = "//"
+grammar = "hcl"
 formatter = { command = "alloy", args = ["fmt", "-"] }
 auto-format = true
-grammar = "hcl"
-
-# [[grammar]]
-# name = "alloy"
-# source = { git = "https://github.com/Artemigos/tree-sitter-alloy", rev = "HEAD" }
-# source = { git = "https://github.com/applejag/tree-sitter-hcl", rev = "feature/identifier-dots-for-alloy" }

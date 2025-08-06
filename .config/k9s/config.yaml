@@ -1,0 +1,12 @@
+k9s:
+  liveViewAutoRefresh: true
+  refreshRate: 3
+  readOnly: false
+  noExitOnCtrlC: true
+  ui:
+    logoless: true
+    headless: false
+    crumbsless: false
+    reactive: false
+    noIcons: true
+    skin: transparent

@@ -34,17 +34,6 @@ fi
 
 alias grep="grep --color=auto"
 
-if exists openssl; then
-	viewcert() {
-		openssl x509 -in "$1" -noout -text
-	}
-fi
-if exists pandoc; then
-	md() {
-		pandoc -t plain "${1:-README.md}" | less
-	}
-fi
-
 # Keybindings
 bind -x '"\C-f": "~/.local/bin/tmux-sessionizer"' # POWER FINGER
 
