@@ -10,13 +10,13 @@ password-file = "~/.config/resticprofile/password.txt"
   exclude-file = "excludes"
   exclude-caches = true
   schedule = "daily"
-  schedule-permission = "user"
+  schedule-permission = "user_logged_in"
   schedule-lock-wait = "15m"
   run-after-fail = 'notify-send -u critical "RESTIC BACKUP FAILED"'
 
   [default.check]
   schedule = "daily"
-  schedule-permission = "user"
+  schedule-permission = "user_logged_in"
   schedule-lock-wait = "15m"
 
   [default.forget]
@@ -26,5 +26,5 @@ password-file = "~/.config/resticprofile/password.txt"
   keep-yearly = 10
   prune = true
   schedule = "daily"
-  schedule-permission = "user"
+  schedule-permission = "user_logged_in"
   schedule-lock-wait = "15m"
