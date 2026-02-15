@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+exists() {
+	command -v $1 >/dev/null 2>&1
+}
+
+docker_tmux() {
+	if ! exists docker; then
+		return
+	fi
+
+	CONTEXT="$(docker context show 2>/dev/null)"
+	if [[ -z "$CONTEXT" ]]; then
+		CONTEXT="N/A"
+	fi
+
+	echo "docker":"$CONTEXT"
+}
+
+docker_tmux
