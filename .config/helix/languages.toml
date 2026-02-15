@@ -55,8 +55,11 @@ disabledRules = { "en-GB" = [
   "PLUS_MINUS",
   "ELLIPSIS",
   "EN_QUOTES",
+  "HYPHEN_TO",
+  "PUNCTUATION_PARAGRAPH_END",
 ], "de-CH" = [
   "TYPOGRAFISCHE_ANFUEHRUNGSZEICHEN_CH",
+  "TYPOGRAFISCHE_ANFUEHRUNGSZEICHEN_2",
   "TYPOGRAFISCHE_APOSTROPHE",
   "MULTIPLICATION_SIGN",
   "ABKUERZUNG_LEERZEICHEN",
@@ -97,6 +100,8 @@ formatter = { command = "nixfmt" }
 
 [[language]]
 name = "hcl"
+injection-regex = "(hcl|tf|nomad|tofu)"
+file-types = ["hcl", "tf", "nomad", "tofu"]
 formatter = { command = "tofu", args = ["fmt", "-"] }
 auto-format = true
 
@@ -145,7 +150,34 @@ formatter = { command = "prettier", args = [
   "--use-tabs",
 ] }
 auto-format = true
+
 # Experimental
+[[language]]
+name = "typst"
+language-servers = ["tinymist", "ltex-ls-plus"]
+auto-format = true
+
+[language-server.tinymist.config]
+formatterMode = "typstyle"
+# exportPdf = "onSave"
+# outputPath = "$root/target/$dir/$name"
+# outputPath = "$dir/$name"
+
+# preview.background.enabled = true
+# preview.background.args = [
+#   "--data-plane-host=127.0.0.1:23635",
+#   "--invert-colors=never",
+#   "--open",
+# ]
+
+
+[language-server.docker-language-server]
+command = "docker-language-server"
+args = ["start", "--stdio"]
+
+[[language]]
+name = "dockerfile"
+language-servers = ["docker-language-server"]
 
 [[language]]
 name = "java"
@@ -164,11 +196,25 @@ indent = { tab-width = 2, unit = "  " }
 
 [[language]]
 name = "alloy"
-scope = "source.alloy"
-injection-regex = "alloy"
-file-types = ["alloy"]
-indent = { tab-width = 2, unit = "\t" }
-comment-token = "//"
-grammar = "hcl"
 formatter = { command = "alloy", args = ["fmt", "-"] }
+auto-format = true
+
+[[language]]
+name = "c"
+auto-format = true
+
+[language-server.lua-language-server.config.Lua.format]
+enable = true
+
+[[language]]
+name = "lua"
+auto-format = true
+
+[[language]]
+name = "docker-compose"
+formatter = { command = "yamlfmt", args = [
+  "-formatter",
+  "retain_line_breaks=true,scan_folded_as_literal=true,trim_trailing_whitespace=true",
+  "-",
+] }
 auto-format = true
