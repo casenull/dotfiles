@@ -19,6 +19,9 @@ mouse-hide-while-typing = true
 
 title = " "
 
+app-notifications = no-clipboard-copy
+bell-features = no-attention, no-title
+
 # Force myself to use tmux
 keybind = ctrl+shift+t=unbind
 keybind = ctrl+shift+n=unbind
