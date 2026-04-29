@@ -34,6 +34,7 @@ args = ["server"]
 language = "en-GB"
 additionalRules.enablePickyRules = true
 latex.commands = { "\\gls{}" = "default" }
+# languageToolHttpServerUri = "http://localhost:8010"
 
   [language-server.ltex-ls-plus.config.ltex.disabledRules]
   en-GB = [
