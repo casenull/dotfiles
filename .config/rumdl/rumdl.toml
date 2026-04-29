@@ -1,0 +1,20 @@
+[global]
+disable = ["MD013"] # Wrapping lines is not cool
+
+[MD003] # Headings
+style = "atx"
+
+[MD004] # Unordered list symbol
+style = "dash"
+
+[MD007] # List indent
+indent = 2
+
+[MD029] # Ordered list numbering
+style = "ordered"
+
+[MD049] # Italic
+style = "underscore"
+
+[MD050] # Bold
+style = "asterisk"

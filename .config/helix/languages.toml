@@ -1,10 +1,4 @@
-# Languages
-
-[[language]]
-name = "go"
-language-servers = ["gopls", "golangci-lint-lsp"]
-formatter = { command = "goimports" }
-auto-format = true
+# Programming
 
 [language-server.golangci-lint-lsp.config]
 command = [
@@ -14,6 +8,12 @@ command = [
   "--show-stats=false",
   "--issues-exit-code=1",
 ]
+
+[[language]]
+name = "go"
+language-servers = ["gopls", "golangci-lint-lsp"]
+formatter = { command = "goimports" }
+auto-format = true
 
 [[language]]
 name = "bash"
@@ -26,14 +26,47 @@ auto-format = true
 
 # Documentation
 
+[language-server.rumdl]
+command = "rumdl"
+args = ["server"]
+
+[language-server.ltex-ls-plus.config.ltex]
+language = "en-GB"
+additionalRules.enablePickyRules = true
+latex.commands = { "\\gls{}" = "default" }
+
+  [language-server.ltex-ls-plus.config.ltex.disabledRules]
+  en-GB = [
+    "PROFANITY",
+    "DASH_RULE",
+    "TWO_HYPHENS",
+    "PLUS_MINUS",
+    "ELLIPSIS",
+    "EN_QUOTES",
+    "HYPHEN_TO",
+    "PUNCTUATION_PARAGRAPH_END",
+  ]
+  de-CH = [
+    "TYPOGRAFISCHE_ANFUEHRUNGSZEICHEN_CH",
+    "TYPOGRAFISCHE_ANFUEHRUNGSZEICHEN_2",
+    "TYPOGRAFISCHE_APOSTROPHE",
+    "MULTIPLICATION_SIGN",
+    "ABKUERZUNG_LEERZEICHEN",
+    "AUSLASSUNGSPUNKTE",
+  ]
+
+[language-server.tinymist.config]
+formatterMode = "typstyle"
+exportPdf = "onSave"
+
 [[language]]
 name = "markdown"
-language-servers = ["marksman", "ltex-ls-plus"]
-formatter = { command = "prettier", args = [
-  "--parser",
-  "markdown",
-  "--use-tabs",
-] }
+language-servers = ["rumdl", "ltex-ls-plus"]
+auto-format = true
+
+[[language]]
+name = "typst"
+language-servers = ["tinymist", "ltex-ls-plus"]
 auto-format = true
 
 [[language]]
@@ -41,35 +74,10 @@ name = "latex"
 language-servers = ["texlab", "ltex-ls-plus"]
 indent = { tab-width = 2, unit = "\t" }
 formatter = { command = "latexindent", args = ["--cruft=/tmp/"] }
-# Switch to `tex-fmt` as soon as tables are supported
-# formatter = { command = "tex-fmt", args = ["--stdin", "--nowrap", "--usetabs", "--tabsize", "1"] }
 auto-format = true
 
-[language-server.ltex-ls-plus.config.ltex]
-language = "en-GB"
-additionalRules.enablePickyRules = true
-disabledRules = { "en-GB" = [
-  "PROFANITY",
-  "DASH_RULE",
-  "TWO_HYPHENS",
-  "PLUS_MINUS",
-  "ELLIPSIS",
-  "EN_QUOTES",
-  "HYPHEN_TO",
-  "PUNCTUATION_PARAGRAPH_END",
-], "de-CH" = [
-  "TYPOGRAFISCHE_ANFUEHRUNGSZEICHEN_CH",
-  "TYPOGRAFISCHE_ANFUEHRUNGSZEICHEN_2",
-  "TYPOGRAFISCHE_APOSTROPHE",
-  "MULTIPLICATION_SIGN",
-  "ABKUERZUNG_LEERZEICHEN",
-  "AUSLASSUNGSPUNKTE",
-] }
-latex.commands = { "\\gls{}" = "default" }
+# Configuration
 
-# Config
-
-# trim_trailing_whitespace fix: https://github.com/google/yamlfmt/issues/185#issuecomment-2186961227
 [[language]]
 name = "yaml"
 formatter = { command = "yamlfmt", args = [
@@ -110,93 +118,22 @@ name = "tfvars"
 formatter = { command = "tofu", args = ["fmt", "-"] }
 auto-format = true
 
-# Web
-
 [[language]]
-name = "html"
-formatter = { command = "prettier", args = ["--parser", "html", "--use-tabs"] }
+name = "alloy"
+formatter = { command = "alloy", args = ["fmt", "-"] }
 auto-format = true
 
-[[language]]
-name = "css"
-formatter = { command = "prettier", args = ["--parser", "css", "--use-tabs"] }
-auto-format = true
+# EXPERIMENTAL
 
-[[language]]
-name = "javascript"
-formatter = { command = "prettier", args = [
-  "--parser",
-  "typescript",
-  "--use-tabs",
-] }
-auto-format = true
-
-[[language]]
-name = "typescript"
-formatter = { command = "prettier", args = [
-  "--parser",
-  "typescript",
-  "--use-tabs",
-] }
-auto-format = true
-
-[[language]]
-name = "handlebars"
-scope = "source.hbs"
-file-types = ["hbs"]
-formatter = { command = "prettier", args = [
-  "--parser",
-  "glimmer",
-  "--use-tabs",
-] }
-auto-format = true
-
-# Experimental
-[[language]]
-name = "typst"
-language-servers = ["tinymist", "ltex-ls-plus"]
-auto-format = true
-
-[language-server.tinymist.config]
-formatterMode = "typstyle"
-# exportPdf = "onSave"
-# outputPath = "$root/target/$dir/$name"
-# outputPath = "$dir/$name"
-
-# preview.background.enabled = true
-# preview.background.args = [
-#   "--data-plane-host=127.0.0.1:23635",
-#   "--invert-colors=never",
-#   "--open",
-# ]
-
-
-[language-server.docker-language-server]
-command = "docker-language-server"
-args = ["start", "--stdio"]
-
-[[language]]
-name = "dockerfile"
-language-servers = ["docker-language-server"]
+[language-server.jdtls.config.java]
+format = { enabled = true }
 
 [[language]]
 name = "java"
 auto-format = true
 
-[[language-server.jdtls.config.java]]
-format = { enabled = true }
-
 [[language]]
 name = "haskell"
-auto-format = true
-
-[[language]]
-name = "nasm"
-indent = { tab-width = 2, unit = "  " }
-
-[[language]]
-name = "alloy"
-formatter = { command = "alloy", args = ["fmt", "-"] }
 auto-format = true
 
 [[language]]
@@ -210,11 +147,9 @@ enable = true
 name = "lua"
 auto-format = true
 
-[[language]]
-name = "docker-compose"
-formatter = { command = "yamlfmt", args = [
-  "-formatter",
-  "retain_line_breaks=true,scan_folded_as_literal=true,trim_trailing_whitespace=true",
-  "-",
-] }
-auto-format = true
+[language-server.harper-ls]
+command = "harper-ls"
+args = ["--stdio"]
+
+  [language-server.harper-ls.config.harper-ls]
+  dialect = "British"
