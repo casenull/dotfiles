@@ -88,6 +88,15 @@ formatter = { command = "yamlfmt", args = [
 auto-format = true
 
 [[language]]
+name = "docker-compose"
+formatter = { command = "yamlfmt", args = [
+  "-formatter",
+  "retain_line_breaks=true,scan_folded_as_literal=true,trim_trailing_whitespace=true",
+  "-",
+] }
+auto-format = true
+
+[[language]]
 name = "toml"
 formatter = { command = "taplo", args = [
   "format",
