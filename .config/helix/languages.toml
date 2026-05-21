@@ -62,8 +62,12 @@ exportPdf = "onSave"
 
 [[language]]
 name = "markdown"
-language-servers = ["rumdl", "ltex-ls-plus"]
+language-servers = ["rumdl", "ltex-ls-plus", "mpls"]
 auto-format = true
+
+[language-server.mpls]
+command = "mpls"
+args = ["--theme", "dark", "--no-auto"]
 
 [[language]]
 name = "typst"

@@ -22,3 +22,6 @@ continue-comments = false
   [editor.inline-diagnostics]
   cursor-line = "disable"
   other-lines = "disable"
+
+[keys.normal]
+C-p = ":lsp-workspace-command open-preview" # Open `mpls` markdown preview
