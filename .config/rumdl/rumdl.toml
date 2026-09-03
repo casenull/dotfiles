@@ -18,3 +18,7 @@ style = "underscore"
 
 [MD050] # Bold
 style = "asterisk"
+
+[MD060] # Table formatting
+enabled = true
+style = "aligned"

@@ -117,6 +117,11 @@ formatter = { command = "prettier", args = ["--parser", "json", "--use-tabs"] }
 auto-format = true
 
 [[language]]
+name = "json5"
+formatter = { command = "prettier", args = ["--parser", "json5"] }
+auto-format = true
+
+[[language]]
 name = "nix"
 formatter = { command = "nixfmt" }
 
@@ -154,6 +159,26 @@ auto-format = true
 name = "c"
 auto-format = true
 
+[[language]]
+name = "cpp"
+auto-format = true
+# language-servers = ["clangd"]
+
+# [language-server.clangd]
+# command = "clangd"
+# # config = { clangd.fallbackFlags = ["-std=gnu11"] }
+# config = { clangd.fallbackFlags = ["-std=c++20"] }
+# args = []
+
+# [language-server.clangd]
+# command = "clangd"
+# config = { clangd.fallbackFlags = ["-std=c++20"] }
+
+# [[language]]
+# name = "cpp"
+# auto-format = true
+# language-servers = ["clangd"]
+
 [language-server.lua-language-server.config.Lua.format]
 enable = true
 
@@ -167,3 +192,29 @@ args = ["--stdio"]
 
   [language-server.harper-ls.config.harper-ls]
   dialect = "British"
+
+[[language]]
+name = "just"
+scope = "source.just"
+file-types = [
+  "just",
+  { glob = "justfile" },
+  { glob = "Justfile" },
+  { glob = ".justfile" },
+  { glob = ".Justfile" },
+]
+injection-regex = "just"
+comment-token = "#"
+indent = { tab-width = 4, unit = "    " }
+language-servers = ["just-lsp"]
+formatter = { command = "just", args = ["--fmt", "--justfile", "-"] }
+auto-format = true
+
+
+[language-server.jinja-lsp]
+command = "jinja-lsp"
+timeout = 5
+
+[[language]]
+name = "jinja"
+language-servers = ["jinja-lsp"]

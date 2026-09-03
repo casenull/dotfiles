@@ -1,0 +1,56 @@
+#   mise outdated               # what's behind
+#   mise upgrade --bump -i      # pick upgrades, rewrite the versions below
+#   mise lock --global          # refresh ~/.config/mise/mise.lock
+#   mise install                # converge this machine
+#
+# Find a tool:  mise registry | grep -i <name>   /   mise search <name>
+# Inspect one:  mise tool kind
+
+min_version = "2026.8.0"
+
+[settings]
+pin = true
+lockfile = true
+idiomatic_version_file_enable_tools = []
+
+  [settings.status]
+  missing_tools = "always"
+
+[tools]
+# Kubernetes
+kubectl = "latest"
+helm = "latest"
+k9s = "latest"
+talosctl = "1.14.0"
+cilium-cli = "latest"
+cilium-hubble = "latest"
+cmctl = "latest"
+flux2 = "latest"
+flux-operator = "latest"
+opentofu = "latest"
+terraform-ls = "latest"
+oxker = "latest"
+typst = "latest"
+tinymist = "latest"
+rumdl = "latest"
+duckdb = "latest"
+"aqua:helmfile/helmfile" = "latest"
+"aqua:google/yamlfmt" = "latest"
+"aqua:mitsuhiko/minijinja" = "latest"
+"github:home-operations/flate" = "latest"
+loki-logcli = "latest"
+just = "latest"
+
+# Helix
+yamlfmt = "latest"
+yq = "latest"
+jq = "latest"
+prettier = "latest"
+taplo = "latest"
+
+# Dev
+bun = "latest"
+"aqua:astral-sh/uv" = "latest"
+"aqua:astral-sh/ruff" = "latest"
+
+clickhouse = "26.4.2.10"

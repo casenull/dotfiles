@@ -5,8 +5,7 @@ export VISUAL="hx"
 export GOPATH="$HOME/.local/share/go"
 export CARGO_HOME="$HOME/.local/share/cargo"
 export RUSTUP_HOME="$HOME/.local/share/rustup"
-export BUN_INSTALL="$HOME/.bun" # https://github.com/oven-sh/bun/issues/1678
-export PATH="$PATH:$HOME/.local/bin:$CARGO_HOME/bin:$GOPATH/bin:$BUN_INSTALL/bin"
+export PATH="$PATH:$HOME/.local/bin:$CARGO_HOME/bin:$GOPATH/bin:$HOME/.bun/bin"
 
 if [ -d "$HOME/.kube" ]; then
 	# Paste contents of find in series (-s) with delimiter (-d) ":"
@@ -41,6 +40,10 @@ bind -x '"\C-f": "~/.local/bin/tmux-sessionizer"' # POWER FINGER
 if exists fzf; then
 	eval "$(fzf --bash)"
 fi
+if exists mise; then
+	eval "$(mise activate bash)"
+fi
+
 # Instead of `tofu -install-autocomplete`
 if exists tofu; then
 	complete -C "$(which tofu)" tofu
