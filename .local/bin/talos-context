@@ -1,20 +1,9 @@
 #!/usr/bin/env bash
 
-exists() {
-	command -v $1 >/dev/null 2>&1
-}
+config="${TALOSCONFIG:-$HOME/.talos/config}"
+[ -r "$config" ] || exit 0
 
-talos_tmux() {
-	if ! exists kubectl; then
-		return
-	fi
-	CONTEXT="$(talosctl config info --output json | jq --raw-output0 '.context')"
-	# TODO: Check does not work, jq outputs newline
-	if [[ -z "$CONTEXT" ]]; then
-		CONTEXT="N/A"
-		return
-	fi
-	echo talos:"$CONTEXT"
-}
-
-talos_tmux
+context=$(sed -n 's/^context: *//p' "$config" | tr -d "\"'")
+if [ -n "$context" ]; then
+	echo "talos:$context"
+fi

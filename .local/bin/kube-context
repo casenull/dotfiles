@@ -4,27 +4,16 @@ exists() {
 	command -v $1 >/dev/null 2>&1
 }
 
-kube_tmux() {
-	if ! exists kubectl; then
-		return
-	fi
-	# TODO: This is already done in .bashrc
-	if [ -d "$HOME/.kube" ]; then
-		# Paste contents of find in series (-s) with delimiter (-d) ":"
-		export KUBECONFIG=$(find "$HOME/.kube" -type f -name "*.config" | paste -sd ":")
-	fi
+if exists mise; then
+	eval "$(mise env -s bash 2>/dev/null)"
+fi
+exists kubectl || exit 0
 
-	CONTEXT="$(kubectl config current-context 2>/dev/null)"
-	if [[ -z "$CONTEXT" ]]; then
-		CONTEXT="N/A"
-		NAMESPACE="N/A"
-		return
-	else
-		NAMESPACE="$(kubectl config view --minify --output 'jsonpath={..namespace}' 2>/dev/null)"
-		NAMESPACE="${NAMESPACE:-default}"
-	fi
+if [ -d "$HOME/.kube" ]; then
+	export KUBECONFIG=$(find "$HOME/.kube" -type f -name "*.config" | paste -sd ":")
+fi
 
-	echo "$CONTEXT":"$NAMESPACE"
-}
-
-kube_tmux
+current=$(kubectl config view --minify --output 'jsonpath={.current-context}:{..namespace}' 2>/dev/null)
+[ -n "$current" ] || exit 0
+[[ "$current" == *: ]] && current+="default"
+echo "$current"
