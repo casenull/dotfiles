@@ -33,6 +33,15 @@ fi
 
 alias grep="grep --color=auto"
 
+check_server_cert() {
+	local host=${1:?Usage: check_server_cert hostname}
+	openssl s_client -connect "${host}:443" -servername "$host" </dev/null | openssl x509 -noout -dates
+}
+
+whynossl() {
+	check_server_cert "$@"
+}
+
 # Keybindings
 bind -x '"\C-f": "~/.local/bin/tmux-sessionizer"' # POWER FINGER
 
