@@ -21,7 +21,6 @@ idiomatic_version_file_enable_tools = []
 kubectl = "latest"
 helm = "latest"
 k9s = "latest"
-talosctl = "1.14.0"
 cilium-cli = "latest"
 cilium-hubble = "latest"
 cmctl = "latest"
@@ -52,5 +51,3 @@ taplo = "latest"
 bun = "latest"
 "aqua:astral-sh/uv" = "latest"
 "aqua:astral-sh/ruff" = "latest"
-
-clickhouse = "26.4.2.10"
