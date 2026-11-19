@@ -1,11 +1,3 @@
-#   mise outdated               # what's behind
-#   mise upgrade --bump -i      # pick upgrades, rewrite the versions below
-#   mise lock --global          # refresh ~/.config/mise/mise.lock
-#   mise install                # converge this machine
-#
-# Find a tool:  mise registry | grep -i <name>   /   mise search <name>
-# Inspect one:  mise tool kind
-
 min_version = "2026.8.0"
 
 [settings]
@@ -17,28 +9,21 @@ idiomatic_version_file_enable_tools = []
   missing_tools = "always"
 
 [tools]
+oh-my-posh = "33.0.0"
+
 # Kubernetes
 kubectl = "latest"
+talosctl = "latest"
+flux2 = "latest"
 helm = "latest"
 k9s = "latest"
 cilium-cli = "latest"
 cilium-hubble = "latest"
 cmctl = "latest"
-flux2 = "latest"
-flux-operator = "latest"
-opentofu = "latest"
-terraform-ls = "latest"
-oxker = "latest"
-typst = "latest"
-tinymist = "latest"
-rumdl = "latest"
-duckdb = "latest"
-"aqua:helmfile/helmfile" = "latest"
-"aqua:google/yamlfmt" = "latest"
-"aqua:mitsuhiko/minijinja" = "latest"
-"github:home-operations/flate" = "latest"
 loki-logcli = "latest"
-just = "latest"
+
+# Cloud
+oxker = "latest"
 
 # Helix
 yamlfmt = "latest"
@@ -46,8 +31,13 @@ yq = "latest"
 jq = "latest"
 prettier = "latest"
 taplo = "latest"
+rumdl = "latest"
+typst = "latest"
+tinymist = "latest"
+"aqua:google/yamlfmt" = "latest"
 
 # Dev
+just = "latest"
 bun = "latest"
 "aqua:astral-sh/uv" = "latest"
 "aqua:astral-sh/ruff" = "latest"

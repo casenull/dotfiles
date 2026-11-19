@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-config="${TALOSCONFIG:-$HOME/.talos/config}"
-[ -r "$config" ] || exit 0
-
-context=$(sed -n 's/^context: *//p' "$config" | tr -d "\"'")
-if [ -n "$context" ]; then
-	echo "talos:$context"
-fi

@@ -1,17 +1,17 @@
-version = 3
+"$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
+version = 4
 final_space = true
-
-[upgrade]
-source = "github"
-interval = "72h"
-auto = false
-notice = true
-
-# Left
 
 [[blocks]]
 type = "prompt"
 alignment = "left"
+
+  [[blocks.segments]]
+  type = "text"
+  style = "plain"
+  foreground = "green"
+  background = "transparent"
+  template = "{{ if .Env.VIRTUAL_ENV }}<b>({{ base .Env.VIRTUAL_ENV }})</b> {{ end }}"
 
   [[blocks.segments]]
   type = "path"
@@ -19,7 +19,34 @@ alignment = "left"
   foreground = "cyan"
   background = "transparent"
   template = "{{ .Path }}"
-  properties = { style = "folder" }
+  properties.style = "folder"
+
+  # Mimics __git_ps1 from git-sh-prompt with GIT_PS1_SHOWDIRTYSTATE=1 and GIT_PS1_SHOWCOLORHINTS=1
+  [[blocks.segments]]
+  type = "git"
+  style = "plain"
+  foreground = "default"
+  background = "transparent"
+  template = """
+    {{- $gitdir := print .Dir "/.git" -}}
+    {{- if or (eq .PWD $gitdir) (hasPrefix (print $gitdir "/") .PWD) }} <green>GIT_DIR!</>
+    {{- else }} {{ if .Rebase }}<green>{{ if trim .Rebase.HEAD }}{{ .Rebase.HEAD }}{{ else }}{{ .Ref }}{{ end }}</>
+      {{- else if .Detached }}<red>({{ .Ref }}{{ if eq .Ref .ShortHash }}...{{ end }})</>
+      {{- else }}<green>{{ .Ref }}</>{{ end }}
+      {{- $w := gt (add .Working.Modified .Working.Deleted .Working.Moved .Working.Unmerged) 0 }}
+      {{- $i := gt (add .Staging.Added .Staging.Modified .Staging.Deleted .Staging.Moved .Staging.Unmerged) 0 }}
+      {{- $n := and (eq .Hash "(initial)") (not $i) }}
+      {{- if or $w $i $n }} {{ end }}
+      {{- if $w }}<red>*</>{{ end }}
+      {{- if $i }}<green>+</>{{ end }}
+      {{- if $n }}<green>#</>{{ end }}
+      {{- if .Rebase }}{{ if trim .Rebase.HEAD }}|REBASE{{ else }}|AM{{ end }} {{ .Rebase.Current }}/{{ .Rebase.Total }}
+      {{- else if .CherryPick }}|CHERRY-PICKING
+      {{- else if .Revert }}|REVERTING
+      {{- else if .Merge }}|MERGING
+      {{- else if glob (print $gitdir "/BISECT_LOG") }}|BISECTING{{ end }}
+    {{- end }}"""
+  options = { fetch_status = true, branch_icon = "", commit_icon = "", tag_icon = "", rebase_icon = "", cherry_pick_icon = "", revert_icon = "", merge_icon = "", no_commits_icon = "" }
 
   [[blocks.segments]]
   type = "text"
@@ -36,8 +63,6 @@ foreground = "darkGray"
 background = "transparent"
 template = "> "
 
-# Right (Info will be replaced by prompt or tooltips)
-
 [[blocks]]
 type = "rprompt"
 overflow = "hidden"
@@ -50,44 +75,18 @@ overflow = "hidden"
   template = "{{ .FormattedMs }}"
   properties = { threshold = 5000 }
 
-  [[blocks.segments]]
-  type = "git"
-  style = "plain"
-  foreground = "darkGray"
-  background = "transparent"
-  template = " ({{ .HEAD }}{{ if .Working.Changed }} <red>{{ .Working.String}}</>{{ end }}{{ if .Staging.Changed }} <green>{{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }} <yellow>{{ .StashCount }}</>{{ end }})"
-  properties = { branch_icon = "", commit_icon = "", fetch_status = true, fetch_stash_count = true }
-
-  [[blocks.segments]]
-  type = "nix-shell"
-  style = "plain"
-  foreground = "darkGray"
-  background = "transparent"
-  template = " nix({{ .Type }})"
-
-  [[blocks.segments]]
-  # Default: Only active in virtual environment
-  type = "python"
-  style = "plain"
-  foreground = "darkGray"
-  background = "transparent"
-  template = "{{ if .Venv }} ({{ .Venv }}){{ end }}"
-  properties = { folder_name_fallback = false, home_enabled = true }
-
-  ## Tooltips
+[[tooltips]]
+type = "kubectl"
+tips = ["kubectl", "helm", "flux", "flux-operator", "cilium", "hubble"]
+style = "plain"
+foreground = "white"
+background = "#1545A8"
+template = " {{ .Context }}{{ if .Namespace }}:{{ .Namespace }}{{ end }} "
 
 [[tooltips]]
 type = "talosctl"
-tips = ["talosctl"]
+tips = ["talosctl", "topf"]
 style = "plain"
-foreground = "blue"
-background = "transparent"
-template = "{{ .Context }}"
-
-[[tooltips]]
-type = "kubectl"
-tips = ["kubectl"]
-style = "plain"
-foreground = "lightBlue"
-background = "transparent"
-template = "{{.Context}}{{if .Namespace}}:{{.Namespace}}{{end}}"
+foreground = "white"
+background = "#E12D46"
+template = " {{ .Context }} "
