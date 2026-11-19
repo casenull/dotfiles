@@ -63,18 +63,6 @@ foreground = "darkGray"
 background = "transparent"
 template = "> "
 
-[[blocks]]
-type = "rprompt"
-overflow = "hidden"
-
-  [[blocks.segments]]
-  type = "executiontime"
-  style = "plain"
-  foreground = "yellow"
-  background = "transparent"
-  template = "{{ .FormattedMs }}"
-  properties = { threshold = 5000 }
-
 [[tooltips]]
 type = "kubectl"
 tips = ["kubectl", "helm", "flux", "flux-operator", "cilium", "hubble"]
